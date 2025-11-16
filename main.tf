@@ -132,7 +132,7 @@ resource "aws_instance" "web_server" {
   }
 }
 
-# Security Group for RDS instance
+# Security Group for RDS
 resource "aws_security_group" "rds_sg" {
   name        = "rds_sg"
   description = "Allow MySQL traffic from web servers SG only"
@@ -159,10 +159,10 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
-# RDS Subnet Group for the private subnets
+# RDS Subnet Group
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name       = "rds_subnet_group"
-  subnet_ids = aws_subnet.private[*].id # Use all private subnets
+  subnet_ids = aws_subnet.private[*].id 
 
   tags = {
     Name = "RDS Subnet Group"
@@ -173,7 +173,7 @@ resource "aws_db_subnet_group" "rds_subnet_group" {
 resource "aws_db_instance" "mysql_rds" {
   identifier           = "my-mysql-db-instance"
   engine               = "mysql"
-  engine_version       = "8.0" # Choose a valid version
+  engine_version       = "8.0" 
   instance_class       = "db.t2.micro"
   allocated_storage    = 20
   storage_type         = "gp2"
