@@ -1,10 +1,10 @@
 variable "instance1_name" {
-  description = "Name for the first EC2 instance"
+  description = "EC2 instance 1"
   type        = string
 }
 
 variable "instance2_name" {
-  description = "Name for the second EC2 instance"
+  description = "EC2 instance 2"
   type        = string
 }
 

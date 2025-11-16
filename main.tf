@@ -73,10 +73,6 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
-# NAT Gateways and Private Routes (necessary for DB updates/patches, though not explicitly requested for internet access)
-# The private subnets will not have internet access without a NAT Gateway.
-# This setup assumes no internet egress is needed for the private subnets. 
-
 # Security Group for Web Servers (EC2)
 resource "aws_security_group" "web_server_sg" {
   name        = "web_server_sg"
@@ -92,7 +88,7 @@ resource "aws_security_group" "web_server_sg" {
   }
 
   ingress {
-    description = "SSH from anywhere (for management, adjust as needed)"
+    description = "SSH - anywhere"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -147,7 +143,7 @@ resource "aws_security_group" "rds_sg" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.web_server_sg.id] # Reference the web servers SG
+    security_groups = [aws_security_group.web_server_sg.id] 
   }
   
   # Outbound access for updates etc.
