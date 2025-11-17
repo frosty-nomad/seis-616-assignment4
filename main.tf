@@ -174,7 +174,7 @@ resource "aws_db_instance" "mysql_rds" {
   identifier           = "my-mysql-db-instance"
   engine               = "mysql"
   engine_version       = "8.0" 
-  instance_class       = "db.t2.micro"
+  instance_class       = "db.t3.micro"
   allocated_storage    = 20
   storage_type         = "gp2"
   db_subnet_group_name = aws_db_subnet_group.rds_subnet_group.name
